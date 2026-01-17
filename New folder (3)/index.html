@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>እንኳን ለጥምቀት በዓል አደረሳችሁ </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(165deg, #001333, #ffab00);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #b5be2f;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .envelope-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto 30px;
+        }
+        
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #e17055;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .envelope.open {
+            transform: rotateX(180deg);
+        }
+        
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #e55039;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .letter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f7f9f9;
+            border-radius: 8px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: rotateX(180deg);
+            backface-visibility: hidden;
+            z-index: 1;
+        }
+        
+        .message {
+            text-align: center;
+            color: #2d3436;
+            line-height: 1.6;
+            max-width: 230px;
+        }
+        
+        .message p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .to {
+            font-weight: bold;
+            color: #e17055;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .open-btn {
+            background: #ffab00;
+            color: white;
+        }
+        
+        .open-btn:hover {
+            background: #ffab00;
+            transform: translateY(-3px);
+        }
+        
+        .close-btn {
+            background: #001333;
+            color: white;
+        }
+        
+        .close-btn:hover {
+            background: #c22d2d;
+            transform: translateY(-3px);
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: #fd79a8;
+            opacity: 0;
+            animation: float 5s infinite ease-in;
+            z-index: 10;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .signature {
+            margin-top: 15px;
+            font-style: italic;
+            color: #636e72;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: #2d3436;
+        }
+        
+        .love-icon {
+            margin: 0 5px;
+            color: #e17055;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 500px) {
+            .envelope-container {
+                width: 280px;
+                height: 180px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💌 መልካም የጥምቀት በዓል 💌</h2>
+        
+        <div class="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="letter">
+                   
+                    <div class="to">ከ ፍኖተ ስላም ሰንበት ትምህርት ቤት</div>
+                    <div class="message">
+                        <p>ሕዝቡም ሁሉ ከተጠመቁ በኋላ ኢየሱስ ደግሞ ተጠመቀ። ሲጸልይም ሰማይ ተከፈተ፥
+                             መንፈስ ቅዱስም በአካል መልክ እንደ ርግብ በእርሱ ላይ ወረደ፤ 
+                             የምወድህ ልጄ አንተ ነህ፥ በአንተ ደስ ይለኛል የሚል ድምፅም ከሰማይ መጣ። ሉቃስ 3*21 </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 160px; height: 160px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; z-index: 9; box-shadow: 0 4px 15px #ffab00">
+                <img src="123.jpg" alt="Featured photo" style="width:100%; height:100%; object-fit: cover; display:block; transform: translateZ(50px);">
+            </div>
+        </div>
+
+        
+        <div class="buttons">
+            <button class="btn open-btn" id="openBtn">እንሆ ብስራት</button>
+            <button class="btn close-btn" id="closeBtn">ዕፅው</button>
+        </div>
+        
+        <div class="instructions">
+           <marquee behavior="scroll" direction="left">❤️ርእዩከ ማያት እግዚኦ ርእዪከ ማያት ወፈርሁ  ደንገፁ ቀላያት ማያት ወደምፀ ማያቲሆሙ መዝ ፴፠፲፮</marquee>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const envelope = document.getElementById('envelope');
+            const openBtn = document.getElementById('openBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            // Toggle envelope on button clicks
+            openBtn.addEventListener('click', openEnvelope);
+            closeBtn.addEventListener('click', closeEnvelope);
+            
+            // Toggle envelope on envelope click
+            envelope.addEventListener('click', function() {
+                if (envelope.classList.contains('open')) {
+                    closeEnvelope();
+                } else {
+                    openEnvelope();
+                }
+            });
+            
+            function openEnvelope() {
+                envelope.classList.add('open');
+                createHearts();
+            }
+            
+            function closeEnvelope() {
+                envelope.classList.remove('open');
+            }
+            
+            function createHearts() {
+                // Remove existing hearts
+                document.querySelectorAll('.heart').forEach(heart => heart.remove());
+                
+                // Create 5 hearts
+                for (let i = 0; i < 120; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart';
+                        heart.innerHTML = '🌟';
+                        
+                        // Random position and size
+                        const size = Math.random() * 20 + 20;
+                        const left = Math.random() * 100;
+                        
+                        heart.style.left = `${left}%`;
+                        heart.style.fontSize = `${size}px`;
+                        heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                        
+                        document.body.appendChild(heart);
+                        
+                        // Remove heart after animation completes
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 5000);
+                    }, i * 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
